@@ -1,0 +1,70 @@
+Dia 1: Analisis y Requerimientos
+
+Analisis del Problema:
+En algunos programas de reserva de asientos de cine no cuentan con cambios en sus datos en tiempo real y esto se realizara a travez de un mapeo dimencional en el que se visualizara los datos actualizados de asientos ya sea si estan disponibles u ocupados
+
+Alcance y Limitaciones
+
+Alcance
+-Modelado de una sala de cine de 100 asientos (10 filas por 10 columnas)
+-Mapeo bidimencional en el que que distingue asientos libres y ocupados
+-Sistema de seleccion mediante coordenadas numericas (fila y columna)
+-Validacion para impedir reservas en lugares ya ocupados o con coordenadas inexistentes
+
+Limitaciones
+-Interfaz basada exclusivamente en texto/consola
+-La informacion no es persistente (al cerrar el programa la sala regresa a su estado inicial)
+-Manejo de una sola sala por ejecucion.
+-No contempla cobro de boletos, metodos de pago ni generacion de comprobantes
+
+Requerimientos del Sistema
+
+Requerimientos Funcionales (RF)
+-RF-01: El sistema mostrara la cuadricula completa de la sala cada vez que el usuario lo solicite o al realizar un cambio
+-RF-02: El sistema solicitara al usuario ingresar el numero de fila y columna para apartar un lugar
+-RF-03: El sistema verificara que la coordenada seleccionada este libre antes de registrar la reserva.
+-RF-04: El sistema actualizara el simbolo del asiento reservado en la matriz una vez confirmada la operacion
+
+Requerimientos No Funcionales (RNF)
+-RNF-01: La interfaz debe mostrar mensajes claros cuando el usuario cometa un error de captura (coordenadas fuera del mapa o lugar ocupado)
+RNF-02: El proceso de la matriz y la respuesta en pantalla deben ser inmediatos
+-RNF-03: El desarrollo se ejecutara sobre la plataforma .NET utilizando C#
+
+Entradas, Procesos y Salidas
+
+Entradas:
+-Opcion elegida del menu
+-Numero de fila (0 a 9)
+-Numero de columna (0 a 9)
+
+Procesos:
+-Llenado inicial de la matriz con el caracter de disponible ('O')
+-Comprobacion del rango y disponibilidad de las coordenadas ingresadas
+-Lectura del estado del asiento en la posicion solicitada
+-Cambio de estado del caracter de 'O' a 'X' al concretar la reserva
+
+Salidas:
+-Impresion en pantalla del mapa de la sala actualizada
+-Mensajes de confirmacion de reserva o alertas de error
+
+
+Estructura de Datos
+-Se eligio una matriz bidimensional char[10, 10] ya que se adapta de forma exacta a la creacion del mapa dimencional por filas y columnas de una sala de cine
+
+Esta estructura facilita el acceso directo a cualquier asiento usando sus dos indices matriz[fila, columna] lo que permite consultar o modificar el estado del lugar sin necesidad de recorrer listas complejas El tipo char se uso por ser ligero y directo para imprimir simbolos (O para libre, X para ocupado)
+
+Casos de Uso
+
+Caso 1: Impresion de la sala
+-El usuario selecciona la opcion de ver asientos en el menu
+-El sistema recorre la matriz e imprime en pantalla la cuadricula de 10x10 con el estado actual de cada lugar
+
+Caso 2: Reserva de un lugar disponible
+-El usuario ingresa la fila 3 y columna 5
+-El sistema revisa la coordenada y valida que matriz[3, 5] es O
+-El sistema asigna X a esa posicion y muestra el mensaje de confirmacion
+
+Caso 3: Intentar reservar un lugar ocupado
+-El usuario ingresa la fila 3 y columna 5
+-El sistema revisa la coordenada y detecta que matriz[3, 5] ya tiene una X
+-El sistema bloquea la operacion y notifica al usuario que el lugar no esta disponible
