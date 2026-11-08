@@ -33,9 +33,12 @@ Requerimientos Funcionales (RF)
 -RF-08: El sistema calculara y mostrara el porcentaje de ocupacion de la sala
 
 Requerimientos No Funcionales (RNF)
--RNF-01: La interfaz debe mostrar mensajes claros cuando el usuario cometa un error de captura (coordenadas fuera del mapa, lugar ocupado o dato que no es numero)
--RNF-02: El proceso de la matriz y la respuesta en pantalla deben ser inmediatos
--RNF-03: El desarrollo se ejecutara sobre la plataforma .NET utilizando C#
+RNF-01: La interfaz de consola debe mostrar el mapa de asientos alineado y formateado de forma clara para facilitar su lectura gráfica.
+RNF-02: El sistema debe emitir notificaciones explícitas al usuario cuando ingrese una opción inválida, una coordenada fuera de rango o intente seleccionar un asiento ocupado.
+RNF-03: El procesamiento de las validaciones y la actualización del estado de la sala deben ejecutarse de forma inmediata (menos de 1 segundo).
+RNF-04: La aplicación debe estar desarrollada íntegramente en C# utilizando la plantilla de aplicación de consola en la plataforma .NET Core / .NET.
+RNF-05: El almacenamiento del estado de la sala debe gestionarse eficientemente mediante una matriz bidimensional nativa char[10, 10].
+RNF-06: La estructura del programa debe permitir la manipulación consistente del mapa durante la sesión sin perder el estado de las reservas realizadas mientras la aplicación esté en ejecución.
 
 Entradas, Procesos y Salidas
 
