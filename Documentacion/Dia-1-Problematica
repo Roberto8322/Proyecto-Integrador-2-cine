@@ -1,21 +1,23 @@
 Dia 1: Analisis y Requerimientos
 
 Analisis del Problema:
-Un cine necesita saber qué asientos de su sala están libres y cuáles ocupados, para no vender dos veces el mismo lugar. Llevar este control a mano genera errores y no muestra el estado actual de la sala.
-Se propone un programa en consola que representa la sala como una matriz de 10 filas por 10 columnas. Cada posición indica si el asiento está libre (O) u ocupado (X). El programa permite mostrar la sala, reservar y liberar asientos, consultar si un asiento está disponible, contar los asientos ocupados y disponibles, y calcular el porcentaje de ocupación.
+Un cine necesita saber que asientos de su sala estan libres y cuales ocupados, para no vender dos veces el mismo lugar. Llevar este control a mano genera errores y no muestra el estado actual de la sala.
+Se propone un programa en consola que representa la sala como una matriz de 10 filas por 10 columnas. Cada posicion indica si el asiento esta libre (O) u ocupado (X). El programa permite mostrar la sala, reservar y liberar asientos, consultar si un asiento esta disponible, contar los asientos ocupados y disponibles, y calcular el porcentaje de ocupacion.
 
 Alcance y Limitaciones
 
 Alcance
 -Modelado de una sala de cine de 100 asientos (10 filas por 10 columnas)
--Mapeo bidimencional en el que que distingue asientos libres y ocupados
+-Mapeo bidimensional en el que se distinguen asientos libres y ocupados
 -Sistema de seleccion mediante coordenadas numericas (fila y columna)
 -Validacion para impedir reservas en lugares ya ocupados o con coordenadas inexistentes
+-Validacion de entradas que no sean numeros (por ejemplo letras en lugar de fila o columna)
+-Liberacion, consulta, conteo y porcentaje de ocupacion de los asientos
 
 Limitaciones
 -Interfaz basada exclusivamente en texto/consola
 -La informacion no es persistente (al cerrar el programa la sala regresa a su estado inicial)
--Manejo de una sola sala por ejecucion.
+-Manejo de una sola sala por ejecucion
 -No contempla cobro de boletos, metodos de pago ni generacion de comprobantes
 
 Requerimientos del Sistema
@@ -23,12 +25,16 @@ Requerimientos del Sistema
 Requerimientos Funcionales (RF)
 -RF-01: El sistema mostrara la cuadricula completa de la sala cada vez que el usuario lo solicite o al realizar un cambio
 -RF-02: El sistema solicitara al usuario ingresar el numero de fila y columna para apartar un lugar
--RF-03: El sistema verificara que la coordenada seleccionada este libre antes de registrar la reserva.
+-RF-03: El sistema verificara que la coordenada seleccionada este libre antes de registrar la reserva
 -RF-04: El sistema actualizara el simbolo del asiento reservado en la matriz una vez confirmada la operacion
+-RF-05: El sistema permitira liberar un asiento ocupado indicando fila y columna
+-RF-06: El sistema permitira consultar si un asiento esta libre u ocupado
+-RF-07: El sistema contara los asientos ocupados y los disponibles
+-RF-08: El sistema calculara y mostrara el porcentaje de ocupacion de la sala
 
 Requerimientos No Funcionales (RNF)
--RNF-01: La interfaz debe mostrar mensajes claros cuando el usuario cometa un error de captura (coordenadas fuera del mapa o lugar ocupado)
-RNF-02: El proceso de la matriz y la respuesta en pantalla deben ser inmediatos
+-RNF-01: La interfaz debe mostrar mensajes claros cuando el usuario cometa un error de captura (coordenadas fuera del mapa, lugar ocupado o dato que no es numero)
+-RNF-02: El proceso de la matriz y la respuesta en pantalla deben ser inmediatos
 -RNF-03: El desarrollo se ejecutara sobre la plataforma .NET utilizando C#
 
 Entradas, Procesos y Salidas
@@ -43,16 +49,22 @@ Procesos:
 -Comprobacion del rango y disponibilidad de las coordenadas ingresadas
 -Lectura del estado del asiento en la posicion solicitada
 -Cambio de estado del caracter de 'O' a 'X' al concretar la reserva
+-Cambio de estado de 'X' a 'O' al liberar un asiento
+-Conteo de los asientos con 'X' (ocupados) y con 'O' (disponibles)
+-Calculo del porcentaje de ocupacion: ocupados entre 100, por 100
 
 Salidas:
 -Impresion en pantalla del mapa de la sala actualizada
 -Mensajes de confirmacion de reserva o alertas de error
-
+-Mensaje de confirmacion al liberar, o aviso si el asiento ya estaba libre
+-Estado del asiento consultado (libre u ocupado)
+-Total de asientos ocupados y disponibles
+-Porcentaje de ocupacion
 
 Estructura de Datos
--Se eligio una matriz bidimensional char[10, 10] ya que se adapta de forma exacta a la creacion del mapa dimencional por filas y columnas de una sala de cine
+-Se eligio una matriz bidimensional char[10, 10] ya que se adapta de forma exacta a la creacion del mapa bidimensional por filas y columnas de una sala de cine
 
-Esta estructura facilita el acceso directo a cualquier asiento usando sus dos indices matriz[fila, columna] lo que permite consultar o modificar el estado del lugar sin necesidad de recorrer listas complejas El tipo char se uso por ser ligero y directo para imprimir simbolos (O para libre, X para ocupado)
+Esta estructura facilita el acceso directo a cualquier asiento usando sus dos indices matriz[fila, columna], lo que permite consultar o modificar el estado del lugar sin necesidad de recorrer listas complejas. El tipo char se uso por ser ligero y directo para imprimir simbolos (O para libre, X para ocupado)
 
 Casos de Uso
 
@@ -69,3 +81,27 @@ Caso 3: Intentar reservar un lugar ocupado
 -El usuario ingresa la fila 3 y columna 5
 -El sistema revisa la coordenada y detecta que matriz[3, 5] ya tiene una X
 -El sistema bloquea la operacion y notifica al usuario que el lugar no esta disponible
+
+Caso 4: Liberar un lugar ocupado
+-El usuario ingresa la fila 3 y columna 5
+-El sistema revisa que matriz[3, 5] tiene una X
+-El sistema cambia la X por O y muestra el mensaje de confirmacion
+
+Caso 5: Intentar liberar un lugar que ya esta libre
+-El usuario ingresa la fila 3 y columna 5
+-El sistema detecta que matriz[3, 5] ya es O
+-El sistema avisa que ese lugar ya estaba libre
+
+Caso 6: Consultar disponibilidad
+-El usuario ingresa la fila 3 y columna 5
+-El sistema lee matriz[3, 5] y muestra si esta libre u ocupado
+
+Caso 7: Ver estadisticas
+-El usuario elige la opcion de estadisticas
+-El sistema recorre la matriz y cuenta los asientos ocupados y disponibles
+-El sistema calcula el porcentaje de ocupacion y muestra los tres datos
+
+Caso 8: Ingresar una coordenada invalida
+-El usuario ingresa una letra o un numero fuera de 0 a 9
+-El sistema detecta que el dato no es valido
+-El sistema muestra un mensaje de error y vuelve a pedir el dato
