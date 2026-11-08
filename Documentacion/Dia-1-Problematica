@@ -1,7 +1,8 @@
 Dia 1: Analisis y Requerimientos
 
 Analisis del Problema:
-En algunos programas de reserva de asientos de cine no cuentan con cambios en sus datos en tiempo real y esto se realizara a travez de un mapeo dimencional en el que se visualizara los datos actualizados de asientos ya sea si estan disponibles u ocupados
+Un cine necesita saber qué asientos de su sala están libres y cuáles ocupados, para no vender dos veces el mismo lugar. Llevar este control a mano genera errores y no muestra el estado actual de la sala.
+Se propone un programa en consola que representa la sala como una matriz de 10 filas por 10 columnas. Cada posición indica si el asiento está libre (O) u ocupado (X). El programa permite mostrar la sala, reservar y liberar asientos, consultar si un asiento está disponible, contar los asientos ocupados y disponibles, y calcular el porcentaje de ocupación.
 
 Alcance y Limitaciones
 
