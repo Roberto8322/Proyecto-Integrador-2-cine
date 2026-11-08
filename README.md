@@ -17,6 +17,6 @@ Tecnologias Utilizadas:
 
 Instrucciones de Ejecucion:
 
--Clonar el repositorio git clone https://github.com/usuario/Proyecto.Integrador-2-cine.git
+-Clonar el repositorio git clone https://github.com/Roberto8322/Proyecto-Integrador-2-cine.git
 -Abrir la solucion .sln en Visual Studio dentro de la carpeta Codigo
 -Presionar F5 o el boton Iniciar para ejecutar la aplicacion de consola
