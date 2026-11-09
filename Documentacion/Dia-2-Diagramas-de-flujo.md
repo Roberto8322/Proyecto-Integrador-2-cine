@@ -22,13 +22,13 @@ flowchart TD
 ## 2. Mostrar sala
 ```mermaid
 flowchart TD
-    A([Inicio]) --> B[/Imprimir encabezado/]
+    A([Inicio]) --> B[/Imprimir encabezado 0-9/]
     B --> C[fila i = 0]
     C --> D{"¿i es menor que 10?"}
     D -->|No| Z([Fin])
     D -->|Sí| E[columna j = 0]
     E --> F{"¿j es menor que 10?"}
-    F -->|Sí| G[/Imprimir asiento/]
+    F -->|Sí| G[/Imprimir letra de fila A-J y asientos/]
     G --> H[j = j + 1]
     H --> F
     F -->|No| I[Salto de línea y i = i + 1]
@@ -38,8 +38,8 @@ flowchart TD
 ## 3. Reservar asiento
 ```mermaid
 flowchart TD
-    A([Inicio]) --> B[/Pedir fila y columna/]
-    B --> C{"¿Son números de 0 a 9?"}
+    A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
+    B --> C{"¿Fila A-J y columna 0-9 válidas?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
     C -->|Sí| E{"¿El asiento está libre?"}
@@ -53,8 +53,8 @@ flowchart TD
 ## 4. Liberar asiento
 ```mermaid
 flowchart TD
-    A([Inicio]) --> B[/Pedir fila y columna/]
-    B --> C{"¿Son números de 0 a 9?"}
+    A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
+    B --> C{"¿Fila A-J y columna 0-9 válidas?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
     C -->|Sí| E{"¿El asiento está ocupado?"}
@@ -68,8 +68,8 @@ flowchart TD
 ## 5. Consultar disponibilidad
 ```mermaid
 flowchart TD
-    A([Inicio]) --> B[/Pedir fila y columna/]
-    B --> C{"¿Son números de 0 a 9?"}
+    A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
+    B --> C{"¿Fila A-J y columna 0-9 válidas?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
     C -->|Sí| E{"¿El asiento es X?"}
