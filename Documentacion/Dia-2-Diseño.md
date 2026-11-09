@@ -249,3 +249,46 @@ SubProceso MostrarEstadisticas(sala)
 	Escribir "Porcentaje de ocupacion : ", porcentaje, "%"
 FinSubProceso
 
+
+* Diseño modular
+
+* El programa se divide en funciones, y cada una hace una sola cosa:
+
+| Modulo | Que hace |
+| :--- | :--- |
+| **Menu principal** | Muestra las opciones y llama a la funcion que se elija |
+| **MostrarSala** | Recorre la matriz e imprime la sala |
+| **LeerCoordenada** | Pide fila (A-J) y columna (0-9) y valida los rangos |
+| **ReservarAsiento** | Cambia O por X si el asiento esta libre |
+| **LiberarAsiento** | Cambia X por O si el asiento esta ocupado |
+| **ConsultarAsiento** | Dice si un asiento esta libre u ocupado |
+| **MostrarEstadisticas** | Cuenta ocupados y disponibles y calcula el porcentaje |
+
+* Diseño preliminar de la interfaz
+
+* Menu Principal
+
+   Sala  de Cine
+
+0. Salir
+1. Ver sala
+2. Reservar asiento
+3. Liberar asiento
+4. Consultar disponibilidad
+5. Ver estadisticas
+Elige una opcion:
+
+Sala (O = libre, X = ocupado)
+
+| Fila | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **A** | O | O | O | O | O | O | O | O | O | O |
+| **B** | O | O | O | O | O | O | O | O | O | O |
+| **C** | O | O | O | X | O | O | O | O | O | O |
+| **D** | O | O | O | O | O | O | O | O | O | O |
+| **E** | O | O | O | O | O | O | O | O | O | O |
+| **F** | O | O | O | O | O | O | O | O | O | O |
+| **G** | O | O | O | O | O | O | O | O | O | O |
+| **H** | O | O | O | O | O | O | O | O | O | O |
+| **I** | O | O | O | O | O | O | O | O | O | O |
+| **J** | O | O | O | O | O | O | O | O | O | O |
