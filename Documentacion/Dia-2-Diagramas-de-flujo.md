@@ -2,85 +2,97 @@
 
 ## 1. Menú principal
 ```mermaid
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
 flowchart TD
     A([Inicio]) --> B[Llenar matriz con O]
-    B --> C[/Leer opción del menú/]
+    B --> C[/Mostrar menú y leer opción/]
     C --> D{"¿Qué opción?"}
-    D -->|1| E[Ver sala]
-    D -->|2| F[Reservar]
-    D -->|3| G[Liberar]
-    D -->|4| H[Consultar]
-    D -->|5| I[Estadísticas]
     D -->|0| J([Fin])
+    D -->|1| E[Mostrar sala de asientos]
+    D -->|2| F[Reservar asiento]
+    D -->|3| G[Liberar asiento]
+    D -->|4| H[Consultar disponibilidad]
+    D -->|5| I[Estadística de ocupación]
+    D -->|Otra| K[Opción no válida]
     E --> C
     F --> C
     G --> C
     H --> C
     I --> C
+    K --> C
 ```
 
 ## 2. Mostrar sala
 ```mermaid
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
 flowchart TD
-    A([Inicio]) --> B[/Imprimir encabezado/]
+    A([Inicio]) --> B[/Imprimir columnas 0 a 9/]
     B --> C[fila i = 0]
     C --> D{"¿i es menor que 10?"}
     D -->|No| Z([Fin])
-    D -->|Sí| E[columna j = 0]
-    E --> F{"¿j es menor que 10?"}
-    F -->|Sí| G[/Imprimir asiento/]
-    G --> H[j = j + 1]
-    H --> F
-    F -->|No| I[Salto de línea y i = i + 1]
-    I --> D
+    D -->|Sí| E[/Imprimir letra de la fila/]
+    E --> F[columna j = 0]
+    F --> G{"¿j es menor que 10?"}
+    G -->|Sí| H[/Imprimir asiento/]
+    H --> I[j = j + 1]
+    I --> G
+    G -->|No| J[Salto de línea y i = i + 1]
+    J --> D
 ```
 
 ## 3. Reservar asiento
 ```mermaid
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
 flowchart TD
-    A([Inicio]) --> B[/Pedir fila y columna/]
-    B --> C{"¿Son números de 0 a 9?"}
+    A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
+    B --> C{"¿Fila de A a J y columna de 0 a 9?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
-    C -->|Sí| E{"¿El asiento está libre?"}
-    E -->|No| F[Asiento ocupado]
-    F --> Z
-    E -->|Sí| G[Cambiar O por X]
-    G --> H[/Mostrar confirmación/]
-    H --> Z
+    C -->|Sí| E[Convertir la letra en número de fila]
+    E --> F{"¿El asiento está libre?"}
+    F -->|No| G[Mostrar: asiento ocupado]
+    G --> Z
+    F -->|Sí| H[Cambiar O por X]
+    H --> I[/Mostrar confirmación/]
+    I --> Z
 ```
 
 ## 4. Liberar asiento
 ```mermaid
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
 flowchart TD
-    A([Inicio]) --> B[/Pedir fila y columna/]
-    B --> C{"¿Son números de 0 a 9?"}
+    A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
+    B --> C{"¿Fila de A a J y columna de 0 a 9?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
-    C -->|Sí| E{"¿El asiento está ocupado?"}
-    E -->|No| F[Ya estaba libre]
-    F --> Z
-    E -->|Sí| G[Cambiar X por O]
-    G --> H[/Mostrar confirmación/]
-    H --> Z
+    C -->|Sí| E[Convertir la letra en número de fila]
+    E --> F{"¿El asiento está ocupado?"}
+    F -->|No| G[Mostrar: ya estaba libre]
+    G --> Z
+    F -->|Sí| H[Cambiar X por O]
+    H --> I[/Mostrar confirmación/]
+    I --> Z
 ```
 
 ## 5. Consultar disponibilidad
 ```mermaid
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
 flowchart TD
-    A([Inicio]) --> B[/Pedir fila y columna/]
-    B --> C{"¿Son números de 0 a 9?"}
+    A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
+    B --> C{"¿Fila de A a J y columna de 0 a 9?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
-    C -->|Sí| E{"¿El asiento es X?"}
-    E -->|Sí| F[/Mostrar: ocupado/]
-    E -->|No| G[/Mostrar: libre/]
-    F --> Z
+    C -->|Sí| E[Convertir la letra en número de fila]
+    E --> F{"¿El asiento es X?"}
+    F -->|Sí| G[/Mostrar: ocupado/]
+    F -->|No| H[/Mostrar: libre/]
     G --> Z
+    H --> Z
 ```
 
-## 6. Estadísticas
+## 6. Estadística de ocupación
 ```mermaid
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
 flowchart TD
     A([Inicio]) --> B[Poner contadores en 0]
     B --> C{"¿Quedan asientos por revisar?"}
