@@ -38,6 +38,17 @@ flowchart TD
     I --> G
     G -->|No| J[Salto de línea y i = i + 1]
     J --> D
+    A([Inicio]) --> B[/Imprimir encabezado 0-9/]
+    B --> C[fila i = 0]
+    C --> D{"¿i es menor que 10?"}
+    D -->|No| Z([Fin])
+    D -->|Sí| E[columna j = 0]
+    E --> F{"¿j es menor que 10?"}
+    F -->|Sí| G[/Imprimir letra de fila A-J y asientos/]
+    G --> H[j = j + 1]
+    H --> F
+    F -->|No| I[Salto de línea y i = i + 1]
+    I --> D
 ```
 
 ## 3. Reservar asiento
@@ -46,6 +57,7 @@ flowchart TD
 flowchart TD
     A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
     B --> C{"¿Fila de A a J y columna de 0 a 9?"}
+    B --> C{"¿Fila A-J y columna 0-9 válidas?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
     C -->|Sí| E[Convertir la letra en número de fila]
@@ -63,6 +75,7 @@ flowchart TD
 flowchart TD
     A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
     B --> C{"¿Fila de A a J y columna de 0 a 9?"}
+    B --> C{"¿Fila A-J y columna 0-9 válidas?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
     C -->|Sí| E[Convertir la letra en número de fila]
@@ -80,6 +93,7 @@ flowchart TD
 flowchart TD
     A([Inicio]) --> B[/Pedir fila A-J y columna 0-9/]
     B --> C{"¿Fila de A a J y columna de 0 a 9?"}
+    B --> C{"¿Fila A-J y columna 0-9 válidas?"}
     C -->|No| D[Mostrar error]
     D --> Z([Fin])
     C -->|Sí| E[Convertir la letra en número de fila]
