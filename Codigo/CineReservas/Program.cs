@@ -27,13 +27,13 @@
                     MostrarSala();
                     break;
                 case "2":
-                    ReservarAsiento();
+                    ConsultarDisponibilidad();
                     break;
                 case "3":
-                    LiberarAsiento();
+                    ReservarAsiento();
                     break;
                 case "4":
-                    ConsultarDisponibilidad();
+                    LiberarAsiento();
                     break;
                 case "5":
                     MostrarEstadisticas();
@@ -70,9 +70,9 @@
         Console.WriteLine("===== CINE =====");
         Console.WriteLine("0. Salir");
         Console.WriteLine("1. Mostrar sala de asientos");
-        Console.WriteLine("2. Reservar asiento");
-        Console.WriteLine("3. Liberar asiento");
-        Console.WriteLine("4. Consultar disponibilidad");
+        Console.WriteLine("2. Consultar disponibilidad");
+        Console.WriteLine("3. Reservar asientos");
+        Console.WriteLine("4. Liberar asiento");
         Console.WriteLine("5. Estadística de ocupación");
         Console.Write("Elige una opción: ");
     }
@@ -108,6 +108,40 @@
     int fila = -1;
     int columna = -1;
 
+        
+        while (fila == -1)
+        {
+            Console.Write("Ingrese la fila (A-J): ");
+            string entradaFila = Console.ReadLine().ToUpper();
+
+            int c = 0;
+
+            for (int j = 0; j <= 9; j++)
+            {
+                if (entradaFila.Length > 0 && letras[j] == entradaFila[0])
+                {
+                    fila = c;
+                }
+                c++;
+            }
+
+            if (fila == -1)
+            {
+                Console.WriteLine("Fila no válida. Intente de nuevo.");
+            }
+        }
+
+        while (columna < 0 || columna > 9)
+        {
+            Console.Write("Ingrese la columna (0-9): ");
+
+            if (!int.TryParse(Console.ReadLine(), out columna) || columna < 0 || columna > 9)
+            {
+                columna = -1;
+                Console.WriteLine("Columna no válida. Intente de nuevo.");
+            }
+        }
+    
     while (fila == -1)
     {
         Console.Write("Ingrese la fila (A-J): ");
@@ -129,8 +163,8 @@
         {
             Console.WriteLine("Fila no válida. Intente de nuevo.");
         }
-            
-    }
+    }       
+    
     
 
 while (columna < 0 || columna > 9)
@@ -150,8 +184,14 @@ while (columna < 0 || columna > 9)
     static void ReservarAsiento()
     {
         Console.WriteLine(" RESERVAR ASIENTO ");
-    
-
+        int cantidadAsientos = 0;
+    Console.WriteLine("Ingrese la cantidad de asientos a reservar");
+    while (!int.TryParse(Console.ReadLine(), out cantidadAsientos) || cantidadAsientos <= 0|| cantidadAsientos > 10)
+    {
+        Console.WriteLine("Cantidad no válida. Intente de nuevo.");
+    }
+    for (int o = 0; o < cantidadAsientos; o++)
+    {
     var (fila, columna) = LeerCoordenadas();
 
     if (fila == -1 || columna == -1)
@@ -170,11 +210,45 @@ while (columna < 0 || columna > 9)
         Console.WriteLine("¡Reserva realizada con exito!");
     }
     }
+    }
     static void LiberarAsiento()
 {
+    string MotivoLiberacion = "";
     Console.WriteLine(" LIBERAR ASIENTO ");
 
-  
+    Console.WriteLine("Ingrese motivo de liberación del asiento");
+    Console.WriteLine("1. Motivo de Salud");
+    Console.WriteLine("2. Motivo de Viaje");
+    Console.WriteLine("3. Motivo de Cambio de Planes");
+    Console.WriteLine("4. Otro Motivo");
+    switch (Console.ReadLine())
+        {
+            case "1":
+                MotivoLiberacion = "Motivo de Salud seleccionado.";
+                break;
+            case "2":
+                MotivoLiberacion = "Motivo de Viaje seleccionado.";
+                break;
+            case "3":
+                MotivoLiberacion = "Motivo de Cambio de Planes seleccionado.";
+                break;
+            case "4":
+                Console.WriteLine("Ingrese el motivo de liberación del asiento:");
+                MotivoLiberacion = "" + Console.ReadLine();
+                break;
+            default:
+                Console.WriteLine("Opción no válida. Se considerará como 'Otro Motivo'.");
+                break;
+        }    
+
+            int cantidadAsientos = 0;
+    Console.WriteLine("Ingrese la cantidad de asientos a liberar");
+    while (!int.TryParse(Console.ReadLine(), out cantidadAsientos) || cantidadAsientos <= 0|| cantidadAsientos > 10)
+    {
+        Console.WriteLine("Cantidad no válida. Intente de nuevo.");
+    }
+    for (int o = 0; o < cantidadAsientos; o++)
+    {
     var (fila, columna) = LeerCoordenadas();
 
     if (sala[fila, columna] == 'O')
@@ -186,11 +260,19 @@ while (columna < 0 || columna > 9)
         sala[fila, columna] = 'O';
         Console.WriteLine("¡Asiento liberado con exito!");
     }
+    }
 }
 static void ConsultarDisponibilidad()
 {
     Console.WriteLine("CONSULTAR DISPONIBILIDAD");
-
+            int cantidadAsientos = 0;
+    Console.WriteLine("Ingrese la cantidad de asientos que desea consultar");
+    while (!int.TryParse(Console.ReadLine(), out cantidadAsientos) || cantidadAsientos <= 0|| cantidadAsientos > 100)
+    {
+        Console.WriteLine("Cantidad no válida. Intente de nuevo.");
+    }
+    for (int o = 0; o < cantidadAsientos; o++)
+    {
     var (fila, columna) = LeerCoordenadas();
 
     if (sala[fila, columna] == 'X')
@@ -200,6 +282,7 @@ static void ConsultarDisponibilidad()
     else
     {
         Console.WriteLine("El asiento seleccionado esta: libre O");
+    }
     }
 }
 static void MostrarEstadisticas()
