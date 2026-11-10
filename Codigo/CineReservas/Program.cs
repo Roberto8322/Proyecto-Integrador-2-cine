@@ -3,9 +3,10 @@
     // La sala: matriz de 10 filas (A-J) por 10 columnas (0-9).
     // 'O' = libre, 'X' = ocupado.
     static char[,] sala = new char[10, 10];
-
+    
     static void Main()
     {
+        
         LlenarSala();
 
         bool salir = false;
@@ -26,13 +27,13 @@
                     MostrarSala();
                     break;
                 case "2":
-                    Console.WriteLine("Reservar asiento: pendiente.");
+                    ReservarAsiento();
                     break;
                 case "3":
-                    Console.WriteLine("Liberar asiento: pendiente.");
+                    LiberarAsiento();
                     break;
                 case "4":
-                    Console.WriteLine("Consultar disponibilidad: pendiente.");
+                    ConsultarDisponibilidad();
                     break;
                 case "5":
                     Console.WriteLine("Estadística de ocupación: pendiente.");
@@ -52,7 +53,6 @@
         }
     }
 
-    // Pone todos los asientos como libres ('O').
     static void LlenarSala()
     {
         for (int i = 0; i < 10; i++)
@@ -99,4 +99,107 @@
             Console.WriteLine();
         }
     }
+
+    static (int fila, int columna) LeerCoordenadas()
+    {
+    
+    char[] letras = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+    
+    int fila = -1;
+    int columna = -1;
+
+    while (fila == -1)
+    {
+        Console.Write("Ingrese la fila (A-J): ");
+        string entradaFila = Console.ReadLine().ToUpper();
+
+        int c = 0;
+
+        for (int i = 0; i <= 9; i++)
+        {
+            
+            if (entradaFila.Length > 0 && letras[i] == entradaFila[0])
+            {
+                fila = c; 
+            }
+            c++; 
+        }
+
+        if (fila == -1)
+        {
+            Console.WriteLine("Fila no válida. Intente de nuevo.");
+        }
+            
+    }
+    
+
+while (columna < 0 || columna > 9)
+    {
+        Console.Write("Ingrese la columna (0-9): ");
+        
+        // TryParse lee lo que puso. Si presionó Enter, out dará false
+        if (!int.TryParse(Console.ReadLine(), out columna) || columna < 0 || columna > 9)
+        {
+            columna = -1; // Lo mantenemos en -1 para que el while se repita
+            Console.WriteLine("Columna no válida. Intente de nuevo.");
+        }
+    }
+
+    return (fila, columna);
+    }
+    static void ReservarAsiento()
+    {
+        Console.WriteLine(" RESERVAR ASIENTO ");
+    
+
+    var (fila, columna) = LeerCoordenadas();
+
+    if (fila == -1 || columna == -1)
+    {
+        return;
+    }
+
+  
+    if (sala[fila, columna] == 'X')
+    {
+        Console.WriteLine("El asiento ya se encuentra ocupado");
+    }
+    else
+    {
+        sala[fila, columna] = 'X';
+        Console.WriteLine("¡Reserva realizada con exito!");
+    }
+    }
+    static void LiberarAsiento()
+{
+    Console.WriteLine(" LIBERAR ASIENTO ");
+
+  
+    var (fila, columna) = LeerCoordenadas();
+
+    if (sala[fila, columna] == 'O')
+    {
+        Console.WriteLine("El asiento ya estaba libre");
+    }
+    else
+    {
+        sala[fila, columna] = 'O';
+        Console.WriteLine("¡Asiento liberado con exito!");
+    }
+}
+static void ConsultarDisponibilidad()
+{
+    Console.WriteLine("CONSULTAR DISPONIBILIDAD");
+
+    var (fila, columna) = LeerCoordenadas();
+
+    if (sala[fila, columna] == 'X')
+    {
+        Console.WriteLine("El asiento seleccionado esta: ocupado X");
+    }
+    else
+    {
+        Console.WriteLine("El asiento seleccionado esta: libre O");
+    }
+}
 }
