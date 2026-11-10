@@ -36,7 +36,7 @@
                     ConsultarDisponibilidad();
                     break;
                 case "5":
-                    Console.WriteLine("Estadística de ocupación: pendiente.");
+                    MostrarEstadisticas();
                     break;
                 default:
                     Console.WriteLine("Opción no válida. Intenta de nuevo.");
@@ -201,5 +201,32 @@ static void ConsultarDisponibilidad()
     {
         Console.WriteLine("El asiento seleccionado esta: libre O");
     }
+}
+static void MostrarEstadisticas()
+{
+    Console.WriteLine("ESTADiSTICAS DE LA SALA");
+
+    int ocupados = 0;
+    int libres = 0;
+
+    for (int f = 0; f < 10; f++)
+    {
+        for (int c = 0; c < 10; c++)
+        {
+            if (sala[f, c] == 'X')
+            {
+                ocupados++;
+            }
+            else
+            {
+                libres++;
+            }
+        }
+    }
+    double porcentaje = (ocupados / 100.0) * 100;
+    Console.WriteLine($"Asientos Ocupados: {ocupados}");
+    Console.WriteLine($"Asientos Libres:   {libres}");
+    Console.WriteLine($"Total de Asientos: 100");
+    Console.WriteLine($"Porcentaje de Ocupación: {porcentaje}%");
 }
 }
