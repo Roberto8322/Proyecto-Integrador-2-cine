@@ -16,7 +16,7 @@ flowchart TD
     D -->|Otra| K[Opción no válida]
     E --> C
     F --> C
-    G --> c
+    G --> C
     H --> C
     I --> C
     K --> C
