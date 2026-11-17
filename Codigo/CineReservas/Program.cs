@@ -162,43 +162,6 @@
             }
         }
     
-    // De aquí se regresa la fila y columna que el usuario ingresó correctamente
-    while (fila == -1)
-    {
-        Console.Write("Ingrese la fila (A-J): ");
-        string entradaFila = Console.ReadLine().ToUpper();
-
-        int c = 0;
-
-        for (int i = 0; i <= 9; i++)
-        {
-            
-            if (entradaFila.Length > 0 && letras[i] == entradaFila[0])
-            {
-                fila = c; 
-            }
-            c++; 
-        }
-
-        if (fila == -1)
-        {
-            Console.WriteLine("Fila no válida. Intente de nuevo.");
-        }
-    }       
-    
-    
-
-while (columna < 0 || columna > 9)
-    {
-        Console.Write("Ingrese la columna (0-9): ");
-        
-        // TryParse lee lo que puso. Si presionó Enter, out dará false
-        if (!int.TryParse(Console.ReadLine(), out columna) || columna < 0 || columna > 9)
-        {
-            columna = -1; // Lo mantenemos en -1 para que el while se repita
-            Console.WriteLine("Columna no válida. Intente de nuevo.");
-        }
-    }
 
     // Regresa las dos coordenadas que el usuario ingresó correctamente
     return (fila, columna);
